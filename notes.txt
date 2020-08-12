@@ -1,0 +1,11 @@
+Vue.js añade data binding y reactividad a nuestras aplicaciones. Ambos conceptos son super importantes si quieres entender y aprovechar todas las ventajas que ofrece una librería tan elegante y minimalista como Vue.
+
+Directivas inlcuidad
+v-if
+v-model
+v-for
+
+
+Computed properties
+Manipulación el modelo antes de renderizar el valor canónico.
+Diferencia entre la propiedad computada y los méodos es que los métodos se evalua constantemente y una computed properti solo se evalua cuando cambia la dependencia, en este caso el mensaje, las tareas...En coputed porperties es una versión cacheada.
