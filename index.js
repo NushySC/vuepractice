@@ -1,9 +1,10 @@
-const vm = new Vue({
-	el: 'main',
+const vm1 = new Vue({
+	el: '#section1',
 	data: {
 		laborales: ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'],
 		nolaborales: ['sábado', 'domingo'],
 		minimo: 5,
+		busqueda: '',
 		juegos: [
 			{
 				titulo: 'Battlefield',
@@ -25,7 +26,7 @@ const vm = new Vue({
 			{
 				nombre: 'leer',
 				prioridad: 'alta',
-				done: true,
+				done: false,
 				antiguedad: 78978978978979870,
 			},
 			{
@@ -39,13 +40,13 @@ const vm = new Vue({
 			{
 				nombre: 'esculpir',
 				prioridad: 'alta',
-				done: true,
+				done: false,
 				antiguedad: 40,
 			},
 			{
 				nombre: 'cocinar',
 				prioridad: 'alta',
-				done: true,
+				done: false,
 				antiguedad: 7,
 			},
 		],
@@ -56,21 +57,40 @@ const vm = new Vue({
 			'hacer cosas bonitas',
 		],
 		nuevaTarea: '',
-		mensaje: 'Anuska Sampedro Carballeira',
+		mensaje: 'nushy hushy',
 	},
 	methods: {
+		completarTarea(tarea) {
+			tarea.done = !tarea.done;
+		},
+		isDone(tarea) {
+			if (tarea.done) {
+				return 'Completada';
+			} else {
+				return 'Por hacer';
+			}
+		},
 		agregarTarea() {
 			this.toodoos.unshift(this.nuevaTarea);
 			this.nuevaTarea = '';
 		},
 	},
 	computed: {
+		tareasCompletadas() {
+			return this.tareas.filter((tarea) => tarea.done);
+		},
 		mejoresJuegos() {
 			return this.juegos.filter((juego) => juego.puntuacion > 9);
 		},
 		bestJuegos() {
 			return this.juegos.filter(
 				(juego) => juego.puntuacion >= this.minimo
+			);
+		},
+
+		buscarJuego() {
+			return this.juegos.filter((juego) =>
+				juego.titulo.toLowerCase().includes(this.busqueda)
 			);
 		},
 		mensajeAlReves() {
@@ -84,6 +104,18 @@ const vm = new Vue({
 		},
 		tareasPorAntiguedad() {
 			return this.tareas.sort((a, b) => b.antiguedad - a.antiguedad);
+		},
+	},
+});
+
+const vm2 = new Vue({
+	el: '#section2',
+	data: {
+		mensaje: 'Hola!',
+	},
+	methods: {
+		sayHi() {
+			return this.mensaje;
 		},
 	},
 });

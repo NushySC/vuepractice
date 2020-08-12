@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js">
 	<!--<![endif]-->
+
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +13,47 @@
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="" />
+		<style>
+			li {
+				cursor: pointer;
+			}
+			.otros {
+				background-color: hotpink;
+				border-radius: 8px;
+				margin: 1rem auto;
+				padding: 1rem;
+				color: #313131;
+			}
+			.completado {
+				color: red;
+				text-decoration: line-through;
+			}
+
+			.tareas {
+				background-color: deepskyblue;
+				border-radius: 8px;
+				margin: 1rem auto;
+				padding: 1rem;
+				color: #313131;
+			}
+
+			.juegos {
+				background-color: cornflowerblue;
+				border-radius: 8px;
+				margin: 1rem auto;
+				padding: 1rem;
+				color: #313131;
+			}
+			.mas-tareas {
+				background-color: goldenrod;
+				border-radius: 8px;
+				margin: 1rem auto;
+				padding: 1rem;
+				color: #313131;
+			}
+		</style>
 	</head>
+
 	<body>
 		<!--[if lt IE 7]>
 			<p class="browsehappy">
@@ -20,95 +61,144 @@
 				<a href="#">upgrade your browser</a> to improve your experience.
 			</p>
 		<![endif]-->
-		<main>
+		<section id="section1">
 			<!-- <h1 v-show="conectado">Estoy conectado</h1> -->
-			<h3>Mejores juegos</h3>
-			<ul>
-				<li v-for="juego in mejoresJuegos" >
-					{{juego.titulo}}
-				</li>
-			</ul>
-			<h3>Best juegos</h3>
-			<ul>
-				<input type="range" min="0" max="10" v-model="minimo">
-				<li v-for="juego in bestJuegos" >
-					{{juego.titulo}} ranks {{ juego.puntuacion }}
-				</li>
-			</ul>
-			<h3>Tareas</h3>
-			<ul>
-			<ul>
-				<li v-if="tarea.done" v-for="tarea in tareas">
-					{{tarea.nombre}}
-				</li>
-			</ul>
-			<h3>Treas con prioridad Alta</h3>
-			<ul>
-				<li v-for="tarea in prioridadAlta">
-					{{tarea.nombre}}
-				</li>
-			</ul>
-			<h3>Treas con prioridad Baja</h3>
-			<ul>
-				<li v-for="tarea in prioridadBaja">
-					{{tarea.nombre}}
-				</li>
-			</ul>
-			<h3>Por antiguedad</h3>
-			<ul>
-				<li v-for="tarea in tareasPorAntiguedad">
-					{{tarea.nombre}}
-				</li>
-			</ul>
-			<h3>{{mensajeAlReves}}</h3>
-			<form v-on:submit.revet="agregarTarea">
-				<input
-					type="text"
-					placeholder="Introduce tu tarea"
-					v-model="nuevaTarea"
-				/>
-				<input
-					type="button"
-					value="Enviar tarea"
-					v-on:click="agregarTarea"
-				/>
-			</form>
-			<ul>
-				<li v-for="toodoo in toodoos">{{ toodoo}}</li>
-			</ul>
-			<!-- <h2 v-if="mierda">Esto es una mierda</h2> -->
-			<!-- <h3 v-if="edad > 18">Eres viejo</h3>
-			<h3 v-else-if="edad = 18">Eres casi viejo</h3>
-			<h3 v-else="edad < 18">Fuera enano</h3>
-            <input type="text" v-model="mensaje" /> 
-        <ul>
-				<li v-for="tarea in tareas">{{ tarea.nombre}}</li>
-			</ul>-->
-
-			<!-- <ul>
-				<li v-for="(value, key, index) in persona">
-					{{index}} - {{key}}: {{ value}} {{nombre}}, {{altura}}
-				</li>
-			</ul>
-			<h2>Días laborales</h2>
-			<ul>
-				<li v-for="dia in laborales">{{ dia }}</li>
-			</ul>
-			<h2>Días no laborales</h2>
-			<ul>
-				<li v-for="dia in nolaborales">{{ dia }}</li>
-			</ul>
-			<h2>Tareas</h2>
-		
-			<pre>{{ $data }}</pre>
-			<template v-if="conectado"
-				><ul>
-					<li>
-						<a href="#">Mis datos</a>
+			<div class="tareas">
+				<h3>Tareas done</h3>
+				<ul>
+					<!-- @click same as v-on:click and v-bind:class same as :class -->
+					<li
+						v-bind:class="{completado: tarea.done}"
+						v-on:click="completarTarea(tarea)"
+						v-for="tarea of tareas"
+					>
+						<p>{{tarea.nombre}}</p>
 					</li>
-				</ul></template
-			> -->
-		</main>
+				</ul>
+				<h3>Tienes {{tareasCompletadas.length}} tareas completadas</h3>
+				<ul>
+					<li
+						v-on:click="completarTarea(tarea)"
+						v-for="tarea of tareas"
+					>
+						<p>
+							La tarea "{{tarea.nombre}}" está {{isDone(tarea)}}
+						</p>
+					</li>
+				</ul>
+			</div>
+			<div class="juegos">
+				<h3>Búsqueda de juegos</h3>
+
+				<input
+					type="search"
+					v-model="busqueda"
+					placeholder="Buscar juegos"
+				/>
+				<ul>
+					<li v-for="juego in buscarJuego">{{ juego.titulo }}</li>
+				</ul>
+				<h3>Mejores juegos</h3>
+				<ul>
+					<li v-for="juego in mejoresJuegos">
+						{{juego.titulo}}
+					</li>
+				</ul>
+				<h3>Best juegos</h3>
+				<ul>
+					<input type="range" min="0" max="10" v-model="minimo" />
+					<li v-for="juego in bestJuegos">
+						{{juego.titulo}} ranks {{ juego.puntuacion }}
+					</li>
+				</ul>
+			</div>
+
+			<div class="mas-tareas">
+				<h3>Tareas</h3>
+				<ul>
+					<li v-if="tarea.done" v-for="tarea in tareas">
+						{{tarea.nombre}}
+					</li>
+				</ul>
+				<h3>Treas con prioridad Alta</h3>
+				<ul>
+					<li v-for="tarea in prioridadAlta">
+						{{tarea.nombre}}
+					</li>
+				</ul>
+				<h3>Treas con prioridad Baja</h3>
+				<ul>
+					<li v-for="tarea in prioridadBaja">
+						{{tarea.nombre}}
+					</li>
+				</ul>
+				<h3>Por antiguedad</h3>
+				<ul>
+					<li v-for="tarea in tareasPorAntiguedad">
+						{{tarea.nombre}}
+					</li>
+				</ul>
+				<h3>{{mensajeAlReves}}</h3>
+				<form v-on:submit.revet="agregarTarea">
+					<input
+						type="text"
+						placeholder="Introduce tu tarea"
+						v-model="nuevaTarea"
+					/>
+					<input
+						type="button"
+						value="Enviar tarea"
+						v-on:click="agregarTarea"
+					/>
+				</form>
+				<ul>
+					<li v-for="toodoo in toodoos">{{ toodoo}}</li>
+				</ul>
+			</div>
+
+			<div class="otros">
+				<h2 v-if="mierda">Esto es una mierda</h2>
+
+				<h3 v-if="edad > 18">Eres viejo</h3>
+				<h3 v-else-if="edad = 18">Eres casi viejo</h3>
+				<h3 v-else="edad < 18">Fuera enano</h3>
+				<input type="text" v-model="mensaje" />
+				<ul>
+					<li v-for="tarea in tareas">{{ tarea.nombre}}</li>
+				</ul>
+
+				<ul>
+					<li v-for="(value, key, index) in persona">
+						{{index}} - {{key}}: {{ value}} {{nombre}}, {{altura}}
+					</li>
+				</ul>
+				<h2>Días laborales</h2>
+				<ul>
+					<li v-for="dia in laborales">{{ dia }}</li>
+				</ul>
+				<h2>Días no laborales</h2>
+				<ul>
+					<li v-for="dia in nolaborales">{{ dia }}</li>
+				</ul>
+				<h2>Tareas</h2>
+
+				<pre>{{ $data }}</pre>
+				<template v-if="conectado"
+					><ul>
+						<li>
+							<a href="#">Mis datos</a>
+						</li>
+					</ul></template
+				>
+			</div>
+		</section>
+
+		
+		<section id="section2">
+			<button>Say Hi</button>
+			<div>{{sayHi()}}</div>
+		</section>
+
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 		<script src="index.js" async defer></script>
