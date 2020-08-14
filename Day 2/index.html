@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+	<!--<![endif]-->
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title></title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="" />
+		<style>
+			* {
+				box-sizing: border-box;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			button {
+				background-color: hotpink;
+				padding: 0.5rem;
+				border: 1px solid hotpink;
+				border-radius: 4px;
+				color: lavender;
+				box-shadow: 4px 4px 2px lavender;
+				transition: all 2s ease-in;
+			}
+			button:hover {
+				background-color: indigo;
+			}
+			.aparecer-enter {
+				opacity: 0;
+			}
+			.aparecer-enter-active {
+				transition: all 1s ease;
+			}
+
+			.aparecer-leave-to {
+				opacity: 0;
+			}
+			.aparecer-leave-active {
+				transition: all 1s ease;
+			}
+		</style>
+	</head>
+	<body>
+		<!--[if lt IE 7]>
+			<p class="browsehappy">
+				You are using an <strong>outdated</strong> browser. Please
+				<a href="#">upgrade your browser</a> to improve your experience.
+			</p>
+		<![endif]-->
+		<main>
+			<h1>
+				Animando con Vue.js
+			</h1>
+			<button @click="mostrar = !mostrar">
+				Mostrar/Ocultar
+			</button>
+			<transition name="aparecer">
+				<ul v-if="mostrar">
+					<li v-for="cosa in cosas">{{cosa.nombre}}</li>
+				</ul>
+			</transition>
+		</main>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+		<script src="index.js"></script>
+	</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+	<!--<![endif]-->
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title></title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="" />
+		<style >
+		
+			.people {
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				margin: 0 auto;
+				width: 90vw;
+			}
+			.card {
+				box-sizing: border-box;
+				display: flex;
+				flex-basis: 25%;
+				min-width: 25%;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				border-radius: 5px;
+				border: 1px solid rgba(185, 185, 185, 0.336);
+				padding: 1rem;
+				margin: 0.5rem;
+				background-color: lavender;
+				box-shadow: 3px 3px 3px rgba(180, 180, 180, 0.733) ;
+			
+			}
+			@media screen and (max-width: 900px){
+			.card{
+				flex-basis: 45%;
+				min-width: 45%;
+			}
+			}
+			@media screen and (max-width:400px){
+			.card{
+				flex-basis: 100%;
+				min-width: 100%;
+			}
+			}
+
+				
+			p{
+				font-family: 'Courier New', Courier, monospace;
+				font-size: 0.8rem;
+				margin: 0.2rem;
+
+			}
+			p:last-child{
+				font-weight: 800;
+			}
+			img{
+					width:5rem;
+					height: auto;
+					margin-bottom: 0.5rem;
+					border-radius: 5px;
+				}
+		</style>
+	</head>
+	<body>
+		<!--[if lt IE 7]>
+			<p class="browsehappy">
+				You are using an <strong>outdated</strong> browser. Please
+				<a href="#">upgrade your browser</a> to improve your experience.
+			</p>
+		<![endif]-->
+		<main>
+			<h2>People</h2>
+			<div class="people">
+				<div class="card" v-for="persona in personas"> 
+				   <img class="card__pic" v-bind:src="persona.picture.thumbnail" ></img>
+				   <p class="card__name">{{persona.name.first}}</p>
+				   <p class="card__lastname">{{persona.name.last}}</p>
+				   <p class="card__email">{{persona.email}}</p>
+			   </div> 
+	   </div>
+		<div class="people">
+				 <div class="card" v-for="persona in personas"> 
+					<img class="card__pic" v-bind:src="persona.picture.thumbnail" ></img>
+					<p class="card__name">{{persona.name.first}}</p>
+					<p class="card__lastname">{{persona.name.last}}</p>
+					<p class="card__email">{{persona.email}}</p>
+				</div> 
+		</div>
+<!-- 
+			<img
+				v-for="persona in personas"
+				v-bind:src="persona.picture.thumbnail"
+				alt=""
+			/> -->
+		</main>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="index.js"></script>
+	</body>
+</html>
