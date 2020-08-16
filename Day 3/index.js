@@ -24,12 +24,6 @@ const user = new Vue({
 					console.log(response);
 					this.personas = response.data.results;
 				});
-
-			then((response) => {
-				console.log(response);
-				this.personas = response.data.results;
-			});
-			then((response) => (this.personas = response.data.result));
 		},
 	},
 });

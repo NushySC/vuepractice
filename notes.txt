@@ -11,4 +11,8 @@ new Vue (model view view model) crea una instancia y asocia todas las propiedade
 
 Computed properties
 Manipulación el modelo antes de renderizar el valor canónico.
-Diferencia entre la propiedad computada y los méodos es que los métodos se evalua constantemente y una computed properti solo se evalua cuando cambia la dependencia, en este caso el mensaje, las tareas...En computed properties es una versión cacheada.
+Diferencia entre la prdiropiedad computada y los méodos es que los métodos se evalua constantemente y una computed properti solo se evalua cuando cambia la dependencia, en este caso el mensaje, las tareas...En computed properties es una versión cacheada.
+
+
+Workflow
+npm install -g vue-cli
